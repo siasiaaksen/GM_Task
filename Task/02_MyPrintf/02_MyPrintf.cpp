@@ -60,12 +60,12 @@ int MyPrintf(const char* const _Ptr, ...)
 			case 'd':
 			{
 				int* Ptr = reinterpret_cast<int*>(FAdd += ParameterInter);
-				int ConvertValue = *Ptr;
+				int ConvertValue = *Ptr; // <= 다음 인자(ex. 숫자 12321)
 				char Arr[IntMaxCount] = {};
 				NumberToString(Arr, IntMaxCount, ConvertValue);
 
 				MyPrintf(Arr);
-				ChCount += 2;
+				ChCount += 2; // <= '%d'
 				break;
 			}
 			default:
@@ -96,7 +96,5 @@ void ReFunction()
 int main()
 {
 	MyPrintf("Number : %d\n", 12321);
-
-
 }
 

@@ -21,6 +21,7 @@ int MonsterHp = 100;
 int MonsterSpeed = 10;
 char MonsterName[NAMELEN] = "NONE";
 
+
 // 아주 중요한
 void StrCopy(char* _Arr, int _BufferSize, const char* const _Name)
 {
