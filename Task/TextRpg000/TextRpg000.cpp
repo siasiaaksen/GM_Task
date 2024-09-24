@@ -116,7 +116,7 @@ void SpeedCheckRender(const char* const _Name)
 
 int CalSpeed(int _Speed)
 {
-    return rand() % _Speed;
+    return rand() % _Speed; // <= 플레이어는 0-19, 몬스터는 0-9가 나오게 하기 위해서
 }
 
 
