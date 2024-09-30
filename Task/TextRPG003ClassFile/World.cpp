@@ -8,13 +8,19 @@ void UWorld::InPlayer(class UPlayer& _Player)
 {
 	char InputName[100] = { 0, };
 
+	bool IsNameInput = true;
+
 	while (true)
 	{
+		if (true == IsNameInput)
+		{
+			system("cls");
+
+			std::cout << "이름을 적어주세요" << std::endl;
+			std::cin >> InputName;
+		}
+		
 		system("cls");
-
-		std::cout << "이름을 적어주세요" << std::endl;
-		std::cin >> InputName;
-
 		printf_s("당신의 이름은 %s입니다. 결정하시겠습니까?\n", InputName);
 		printf_s("a. 결정\n");
 		printf_s("b. 재입력\n");
@@ -24,21 +30,19 @@ void UWorld::InPlayer(class UPlayer& _Player)
 		{
 		case 'a':
 		case 'A':
+			IsNameInput = false;
 			IsEnd = true;
 			break;
 		case 'b':
 		case 'B':
+			IsNameInput = true;
 			IsEnd = false;
 			break;
 		default:
+			IsNameInput = false;
+			IsEnd = false;
 			printf_s("잘못된 선택입니다. 다시 선택해주세요\n", InputName);
 			_getch();
-
-			system("cls");
-			printf_s("당신의 이름은 %s입니다. 결정하시겠습니까?\n", InputName);
-			printf_s("a. 결정\n");
-			printf_s("b. 재입력\n");
-			Select = _getch();
 			break;
 		}
 
