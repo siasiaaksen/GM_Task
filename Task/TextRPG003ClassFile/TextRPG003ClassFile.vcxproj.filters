@@ -4,9 +4,6 @@
     <ClCompile Include="EngineConst.cpp">
       <Filter>0_Base</Filter>
     </ClCompile>
-    <ClCompile Include="EngineDebug.cpp">
-      <Filter>0_Base</Filter>
-    </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>1_Engine</Filter>
     </ClCompile>
@@ -28,9 +25,6 @@
     <ClCompile Include="FightZone.cpp">
       <Filter>2_Contents\2_Map</Filter>
     </ClCompile>
-    <ClCompile Include="TextRPG003ClassFile.cpp">
-      <Filter>2_Contents\2_Map</Filter>
-    </ClCompile>
     <ClCompile Include="Town.cpp">
       <Filter>2_Contents\2_Map</Filter>
     </ClCompile>
@@ -40,6 +34,7 @@
     <ClCompile Include="Zone.cpp">
       <Filter>2_Contents\2_Map</Filter>
     </ClCompile>
+    <ClCompile Include="TextRPG003ClassFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="0_Base">
@@ -66,9 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineConst.h">
-      <Filter>0_Base</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineDebug.h">
       <Filter>0_Base</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
