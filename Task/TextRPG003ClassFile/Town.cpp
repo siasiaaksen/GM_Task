@@ -16,6 +16,7 @@ int UTown::InPlayer(class UPlayer& _Player)
 		std::cout << "1. 강화\n";
 		std::cout << "2. 사냥터이동\n";
 		std::cout << "3. 중급마을로 이동\n";
+		std::cout << "4. 초급마을로 이동\n";
 		int Select = _getch();
 
 		switch (Select)
@@ -33,12 +34,15 @@ int UTown::InPlayer(class UPlayer& _Player)
 			printf_s("2눌렀습니다.");
 			_getch();
 			return 2;
-			break;
 		}
 		case '3':
 			printf_s("3눌렀습니다.");
 			_getch();
 			return 3;
+		case '4':
+			printf_s("4눌렀습니다.");
+			_getch();
+			return 4;
 		default:
 			break;
 		}
