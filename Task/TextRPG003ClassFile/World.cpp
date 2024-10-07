@@ -55,7 +55,7 @@ void UWorld::PlayerNameSelect(class UPlayer& _Player)
 		default:
 			IsEnd = false;
 			IsNameInput = false;
-			printf_s("잘못된 선택입니다. 다시 선택해주세요\n", InputName);
+			printf_s("잘못된 선택입니다. 다시 선택해주세요\n");
 			_getch();
 			break;
 		}
@@ -71,39 +71,57 @@ void UWorld::PlayerNameSelect(class UPlayer& _Player)
 	_Player.SetName(InputName);
 }
 
-void UWorld::PlayerZonePlay(class UPlayer& _Player)
+void UWorld::ZoneInit()
 {
-	UTown TownZone0;
+	// 지역들을 준비시키것.
+	// 이니셜라이즈 단계
+	// 객체들을 만들고 처음으로 준비시키는 단계
+	// 대부분 딱 1번한다.
 	TownZone0.SetName("초보마을");
-
-	UTown TownZone1;
 	TownZone1.SetName("중급마을");
-
-	UFightZone FightZone;
 	FightZone.SetName("초보사냥터");
 
-	int Result = 4;
-	while (true)
-	{
-		switch (Result)
-		{
-		case 4:
-			Result = TownZone0.InPlayer(_Player);
-			break;
-		case 3:
-			Result = TownZone1.InPlayer(_Player);
-			break;
-		case 2:
-			Result = FightZone.InPlayer(_Player);
-			break;
-		}
-	}
-
+	TownZone0.InterConnecting(&FightZone);
 }
 
-void UWorld::InPlayer(class UPlayer& _Player)
+
+void UWorld::PlayerZonePlay(class UPlayer& _Player)
 {
-	// 외부기로 헤더만 있고 CPP는 없다. 
+	// 맵도 준비됐고
+	// 플레이어도 다 된상황에서
+	
+	// 100번지
+	//UTown TownZone0;
+	// __int64 LinkZone[LINKZONEMAX]
+	// [0] 200 => 초보사냥터
+	// 
+	// 150번지 
+	//UTown TownZone1;
+	// 200번지 초보사냥터
+	//UFightZone FightZone;
+	// [0] 100 => 초보마을
+
+
+	// 포인터 8바이트 정수입니다.
+	// 100번지
+	UZone* CurZone = &TownZone0;
+
+	while (true)
+	{
+		// 포인터는 실체가 아니고
+		// 그냥 주소값일 뿐이다. 언제든지 변경될수 있다.
+		// UZone이지만 자식의 함수들이 실행됩니다.
+		CurZone = CurZone->InPlayer(_Player);
+	}
+}
+
+// 컨텐츠에 필요한 기능
+// UPlayer 싸우고 스킬쓰고 
+// 이름이나 
+void UWorld::PlayerInit(class UPlayer& _Player)
+{
+	// 플레이어를 준비시키는 곳.
+// 외부기로 헤더만 있고 CPP는 없다. 
 	UEngineFile File;
 	File.SetPath("SaveFile.Dat");
 
@@ -129,6 +147,16 @@ void UWorld::InPlayer(class UPlayer& _Player)
 		File.Read(Arr, NAMELEN);
 		_Player.SetName(Arr);
 	}
+}
 
+void UWorld::InPlayer(class UPlayer& _Player)
+{
+	// 알필요가 없다.
+	// 플레이어를 준비시키고
+	PlayerInit(_Player);
+
+	// 맵을 준비시킨다.
+	ZoneInit();
+	// 플레이
 	PlayerZonePlay(_Player);
 }

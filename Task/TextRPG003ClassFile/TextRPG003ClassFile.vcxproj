@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b9ce3d4c-6bd8-42ea-a4c0-3c033e76c3cc}</ProjectGuid>
+    <ProjectGuid>{adac5a93-943b-4584-b3f9-66ad5dc26f57}</ProjectGuid>
     <RootNamespace>TextRPG003ClassFile</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -128,35 +128,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EngineConst.cpp" />
+    <ClCompile Include="BlackSmith.cpp" />
+    <ClCompile Include="ContentsConst.cpp" />
     <ClCompile Include="FightUnit.cpp" />
     <ClCompile Include="FightZone.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="StatusUnit.cpp" />
     <ClCompile Include="TextRPG003ClassFile.cpp" />
     <ClCompile Include="Town.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EngineConst.h" />
+    <ClInclude Include="BlackSmith.h" />
+    <ClInclude Include="ContentsConst.h" />
     <ClInclude Include="FightUnit.h" />
     <ClInclude Include="FightZone.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Monster.h" />
-    <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="StatusUnit.h" />
     <ClInclude Include="Town.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseSystem\BaseSystem.vcxproj">
-      <Project>{69699ffa-4740-4f60-a6d0-4bf9767055c8}</Project>
+      <Project>{0acebf45-8515-409b-99de-190cd392a6fc}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
