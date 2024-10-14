@@ -6,18 +6,20 @@
 
 void Player::BeginPlay()
 {
-	PlayerImage.Create({1, 1}, '@');
+	Super::BeginPlay();
+
+	RenderImage.Create({1, 1}, '@');
+
+	AActor::SetActorLocation({ 10, 8 });
 }
 
-void Player::Tick(ConsoleImage* _BackBuffer)
+void Player::Tick()
 {
-	// ConsoleImage& BackBuffer = *_BackBuffer;
+	Super::Tick();
 
-	// static은 전역이니까 객체가 필요없다.
 	ConsoleEngine::GetWindow();
 	ConsoleEngine::GetWindowSize();
 
-	// 남에 코드 안건드리고 
 	GlobalValue::WindowPtr;
 	GlobalValue::WindowSize;
 
@@ -45,6 +47,17 @@ void Player::Tick(ConsoleImage* _BackBuffer)
 		case 's':
 			Dir = Enums::GAMEDIR::DOWN;
 			break;
+		case 'Z':
+		case 'z':
+		{
+			Bullet* NewBullet = ConsoleEngine::GetEngine().SpawnActor<Bullet>();
+
+			// 총알이 위로 올라가게도 만드세요.
+			 NewBullet->SetActorLocation(this->GetActorLocation());
+			 NewBullet->Tick();
+
+			break;
+		}
 		default:
 			break;
 		}
@@ -54,29 +67,19 @@ void Player::Tick(ConsoleImage* _BackBuffer)
 	switch (Dir)
 	{
 	case Enums::GAMEDIR::LEFT:
-		Pos += FIntPoint::LEFT;
+		AddActorLocation(FIntPoint::LEFT);
 		break;
 	case Enums::GAMEDIR::RIGHT:
-		Pos += FIntPoint::RIGHT;
+		AddActorLocation(FIntPoint::RIGHT);
 		break;
 	case Enums::GAMEDIR::UP:
-		Pos += FIntPoint::UP;
+		AddActorLocation(FIntPoint::UP);
 		break;
 	case Enums::GAMEDIR::DOWN:
-		Pos += FIntPoint::DOWN;
+		AddActorLocation(FIntPoint::DOWN);
 		break;
 	default:
 		break;
 	}
 }
 
-void Player::Render(ConsoleImage* _BackBuffer)
-{
-	// delete _BackBuffer;
-	_BackBuffer->Copy(Pos, PlayerImage);
-}
-
-void Player::SetActorLocation(FIntPoint _Pos)
-{
-	Pos = _Pos;
-}
