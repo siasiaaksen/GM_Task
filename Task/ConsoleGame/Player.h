@@ -1,6 +1,7 @@
 #pragma once
 #include "ConsoleImage.h"
 #include "Actor.h"
+#include "ActorVector.h"
 
 //class AActor
 //{
@@ -21,5 +22,9 @@ public:
 	void Tick() override;
 
 private:
+	// 또다른 리스트를 가지게 한다.
+	ActorVector BulletVector;
+	static Player* MainPlayer;
+
 };
 
