@@ -7,7 +7,7 @@ class ActorVector
 {
     // 헤더 CPP 분할을 하지 않겠습니다.
 public:
-    int size() const
+    size_t size() const
     {
         return DataSize;
     }
@@ -32,13 +32,13 @@ public:
         ++DataSize;
 	}
 
-    DataType& operator[](int _Index) const
+    DataType& operator[](size_t _Index) const
     {
         return Values[_Index];
     }
 
 private:
 	DataType* Values;
-	int DataSize = 0;
+    size_t DataSize = 0;
 };
 

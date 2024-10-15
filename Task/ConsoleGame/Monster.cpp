@@ -1,6 +1,6 @@
 #include "Monster.h"
 #include "Renderer.h"
-#include "ConsoleEngine.h"
+#include "Player.h"
 
 
 void Monster::BeginPlay()
@@ -33,7 +33,26 @@ void Monster::Tick()
 	//      엔진에서 제공하는 FindObject나 Find 같은 기능들은 대부분 극혐하는 기능들.
 	//      Find(const char*) <= 심지어 문자열 비교라서 2배로 느리다.
 
+	Player* NewPlayer = Player::GetMainPlayer();
 
+	// const가 붙은 클래스 객체는
+	// cosnt가 붙은 함수만 호출할수 있다.
+	const ActorVector& Bullets = NewPlayer->GetBulletVector();
+	
+	for (size_t i = 0; i < Bullets.size(); i++)
+	{
+		AActor* Bullet = Bullets[i];
+		FIntPoint BlulletPos = Bullet->GetActorLocation(); 
+		FIntPoint MonsterPos = this->GetActorLocation();
+
+		if (MonsterPos == BlulletPos)
+		{
+			Bullet->GetImageRenderer()->Active = false;
+			this->GetImageRenderer()->Active = false;
+			return;
+		}
+	}
+	
 
 }
 
