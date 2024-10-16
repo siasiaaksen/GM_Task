@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include <EngineCore/ConsoleEngine.h>
+#include <TetrisContents/TetrisInit.h>
 
 int main()
 {
-    ConsoleEngine::Start();
+    TetrisInit Init;
+    ConsoleEngine::Start(&Init);
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

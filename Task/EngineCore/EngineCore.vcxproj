@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="ActorVector.h" />
     <ClInclude Include="ConsoleEngine.h" />
     <ClInclude Include="ConsoleImage.h" />
     <ClInclude Include="ConsoleWindow.h" />
@@ -29,7 +28,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="ActorVector.cpp" />
     <ClCompile Include="ConsoleEngine.cpp" />
     <ClCompile Include="ConsoleImage.cpp" />
     <ClCompile Include="ConsoleWindow.cpp" />

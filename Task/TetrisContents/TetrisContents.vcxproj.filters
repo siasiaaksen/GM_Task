@@ -2,8 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Block.h" />
+    <ClInclude Include="TetrisInit.h" />
+    <ClInclude Include="Memory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="TetrisInit.cpp" />
+    <ClCompile Include="Memory.cpp" />
   </ItemGroup>
 </Project>
