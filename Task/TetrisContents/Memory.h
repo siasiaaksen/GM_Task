@@ -14,6 +14,11 @@ public:
 
 	void RenderMemory(FIntPoint _Pos);
 
+	Renderer* GetRenderer()
+	{
+		return Render;
+	}
+
 private:
 	Renderer* Render = nullptr;
 	static Memory* memory;

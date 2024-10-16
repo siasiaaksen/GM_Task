@@ -2,7 +2,6 @@
 #include "ConsoleImage.h"
 
 
-
 class UConsoleWindow
 {
 
