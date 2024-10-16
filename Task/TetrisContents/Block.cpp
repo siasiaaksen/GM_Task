@@ -19,6 +19,8 @@ void Block::Tick()
 {
 	Super::Tick();
 
+	Memory* memory = Memory::GetMemory();
+
 	int Value = _kbhit();
 	if (Value != 0)
 	{
@@ -41,6 +43,11 @@ void Block::Tick()
 		case 'S':
 		case 's':
 			AddActorLocation(FIntPoint::DOWN);
+			break;
+		case 'T':
+		case 't':
+			//AddActorLocation(FIntPoint::DOWN);
+			memory->RenderMemory(this->GetActorLocation());
 			break;
 		default:
 			break;

@@ -12,7 +12,12 @@ public:
 		return memory;
 	}
 
+	void RenderMemory(FIntPoint _Pos);
+
 private:
+	Renderer* Render = nullptr;
 	static Memory* memory;
+
+	static int Value;
 };
 
