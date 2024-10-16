@@ -16,10 +16,6 @@ void Block::BeginPlay()
 
 	Renderer* Render = CreateDefaultSubObject();
 	Render->RenderImage.Create({ 1, 1 }, 'B');
-
-	FIntPoint BBSize = BackBuffer->GetImageSize();
-	FIntPoint BlockPos = this->GetActorLocation();
-
 }
 
 void Block::Tick()
@@ -83,17 +79,22 @@ void Block::BlockCheck()
 	FIntPoint CurPos = GetActorLocation();
 	FIntPoint DownPos = CurPos + FIntPoint::DOWN;
 
+	if (DownPos.Y > BackBuffer->GetImageSize().Y - 1)
+	{
+		DownPos.Y = CurPos.Y;
+	}
+
 	char DownImage = memory->GetRenderer()->RenderImage.GetPixel(DownPos.X, DownPos.Y);
 
 	if (BackBuffer->GetImageSize().Y - 1 == CurPos.Y)
 	{
 		memory->RenderMemory(CurPos);
-		this->SetActorLocation({ 0, -1 });
+		this->SetActorLocation({ 0, 0 });
 	}
 	else if ('B' == DownImage)
 	{
 		memory->RenderMemory(CurPos);
-		this->SetActorLocation({ 0, -1 });
+		this->SetActorLocation({ 0, 0 });
 
 	}
 }
