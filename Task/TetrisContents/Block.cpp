@@ -46,6 +46,4 @@ void Block::Tick()
 			break;
 		}
 	}
-
-	Memory* memory = ConsoleEngine::GetEngine().SpawnActor<Memory>();
 }
