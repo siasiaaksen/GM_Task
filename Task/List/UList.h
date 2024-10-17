@@ -1,19 +1,13 @@
 #pragma once
+#include <assert.h>
 
-
-typedef int DataType;
-
-// 중단점이나 디버깅할때 그냥 자료형이 
-// 정해져 있는것이 보기가 더 편해서 이방법을 많이 사용했다.
-// template<typename DataType>
+//typedef int DataType;
+template<typename DataType>
 class UList
 {
 public:
     class UListNode
     {
-        // friend UList;
-        // friend iterator;
-
     public:
         UListNode* Prev = nullptr;
         UListNode* Next = nullptr;
@@ -21,44 +15,86 @@ public:
     };
 
 public:
-    // 순회자라는 클래스를 통해서 
     class iterator
     {
+        friend UList;
+
     public:
+        iterator()
+        {
+
+        }
+
+        bool operator!=(const iterator& _Other)
+        {
+            return CurNode != _Other.CurNode;
+        }
+
+        DataType& operator*()
+        {
+            return CurNode->Data;
+        }
+
+        iterator& operator++()
+        {
+            CurNode = CurNode->Next;
+            return *this;
+        }
+
+        DataType& GetValue()
+        {
+            return CurNode->Data;
+        }
+
     private:
-        UListNode* CurNode;
+        iterator(UListNode* _Node)
+            : CurNode(_Node)
+        {
+
+        }
+
+        UListNode* CurNode = nullptr;
     };
 
 public:
     UList()
     {
-        // 더미노드라고 합니다.
-        Start = new UListNode();
-        End = new UListNode();
-        Start->Data = -1;
-        End->Data = -1;
+        StartNode = new UListNode();
+        EndNode = new UListNode();
+        StartNode->Data = -1;
+        EndNode->Data = -1;
 
-        Start->Next = End;
-        End->Prev = Start;
+        StartNode->Next = EndNode;
+        EndNode->Prev = StartNode;
     }
 
     ~UList()
     {
+        UListNode* CurNode = StartNode;
 
+        while (nullptr != CurNode)
+        {
+            UListNode* NextNode = CurNode->Next;
+            if (nullptr != CurNode)
+            {
+                delete CurNode;
+                CurNode = nullptr;
+            }
+
+            CurNode = NextNode;
+        }
     }
 
-    // push_back의 역개념함수
     void push_front(const DataType& _Data)
     {
         UListNode* ListNode = new UListNode();
         ListNode->Data = _Data;
 
-        ListNode->Prev = Start;
-        ListNode->Next = Start->Next;
+        ListNode->Prev = StartNode;
+        ListNode->Next = StartNode->Next;
 
-        // 이녀석이 먼저 되면 
-        Start->Next->Prev = ListNode;
-        Start->Next = ListNode;
+        StartNode->Next->Prev = ListNode;
+        StartNode->Next = ListNode;
     }
 
     void push_back(const DataType& _Data)
@@ -66,19 +102,58 @@ public:
         UListNode* ListNode = new UListNode();
         ListNode->Data = _Data;
 
-        ListNode->Next = End;
-        ListNode->Prev = End->Prev;
+        ListNode->Next = EndNode;
+        ListNode->Prev = EndNode->Prev;
 
-        // 이녀석이 먼저 되면 
-        End->Prev->Next = ListNode;
-        End->Prev = ListNode;
+        EndNode->Prev->Next = ListNode;
+        EndNode->Prev = ListNode;
+    }
 
+    iterator erase(iterator& _Data)
+    {
+        UListNode* CurNode = _Data.CurNode;
+        if (CurNode == nullptr)
+        {
+            assert(false);
+            return iterator();
+        }
+
+        if (CurNode == StartNode)
+        {
+            assert(false);
+            return iterator();
+        }
+
+        if (CurNode == EndNode)
+        {
+            assert(false);
+            return iterator();
+        }
+
+        UListNode* ReturnNode = CurNode->Next;
+
+        CurNode->Prev->Next = CurNode->Next;
+        CurNode->Next->Prev = CurNode->Prev;
+
+        delete CurNode;
+        CurNode = nullptr;
+
+        return iterator(ReturnNode);
+    }
+
+    iterator begin() 
+    {
+        return iterator(StartNode->Next);
+    }
+
+    iterator end()
+    {
+        return iterator(EndNode);
     }
 
 
 private:
-    UListNode* Start = nullptr;
-    UListNode* End = nullptr;
-
+    UListNode* StartNode = nullptr;
+    UListNode* EndNode = nullptr;
 };
 
