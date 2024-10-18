@@ -12,6 +12,18 @@ public:
         UListNode* Prev = nullptr;
         UListNode* Next = nullptr;
         DataType Data;
+
+    public:
+        // 재귀함수2
+        void Release()
+        {
+            if (nullptr != Next)
+            {
+                Next->Release();
+            }
+
+            delete this;
+        }
     };
 
 public:
@@ -70,9 +82,38 @@ public:
 
     ~UList()
     {
-        UListNode* CurNode = StartNode;
+        // 재귀방식2
+        StartNode->Release();
 
-        while (nullptr != CurNode)
+
+        // 재귀방식1
+        //ReDelete(StartNode);
+
+
+        // while 방식
+        //{
+        //    clear();
+
+        //    if (nullptr != StartNode)
+        //    {
+        //        delete StartNode;
+        //        StartNode = nullptr;
+        //    }
+
+        //    if (nullptr != EndNode)
+        //    {
+        //        delete EndNode;
+        //        EndNode = nullptr;
+        //    }
+        //}
+    }
+
+    // while 방식
+    void clear()
+    {
+        UListNode* CurNode = StartNode->Next;
+
+        while (EndNode != CurNode)
         {
             UListNode* NextNode = CurNode->Next;
             if (nullptr != CurNode)
@@ -83,6 +124,21 @@ public:
 
             CurNode = NextNode;
         }
+    }
+
+    // 재귀방식1(StartNode, EndNode 다 지우는)
+    void ReDelete(UListNode* _Node)
+    {
+        if (nullptr == _Node->Next)
+        {
+            delete _Node;
+            _Node = nullptr;
+            return;
+        }
+
+        ReDelete(_Node->Next);
+        delete _Node;
+        _Node = nullptr;
     }
 
     void push_front(const DataType& _Data)
